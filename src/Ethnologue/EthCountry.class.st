@@ -33,6 +33,16 @@ EthCountry >> <= anECountry [
 	^ self name <= anECountry name
 ]
 
+{ #category : #comparing }
+EthCountry >> = anEthCountry [
+	"Two countries are equal if
+	 (a) they are the same 'kind' of thing.
+	 (b) they have the same name.
+	 (c) each element occurs the same number of times in both of them"
+
+	^ self species = anEthCountry species and: [ self name = anEthCountry name ]
+]
+
 { #category : #adding }
 EthCountry >> addLanguage: anELanguage [
 	" Add anELanguage as a spoken language in the receiver "
@@ -71,6 +81,13 @@ EthCountry >> dialectLanguages [
 	" Answer a <Collection> with dialect languages spoken in the receiver (according to ISO 639) "
 	
 	^ (self languageTypes select: #isCommonDialect) asSortedCollection
+]
+
+{ #category : #comparing }
+EthCountry >> hash [
+	"hash is implemented because #= is implemented"
+	
+	^ self species hash bitXor: self name hash
 ]
 
 { #category : #accessing }

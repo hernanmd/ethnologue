@@ -68,7 +68,7 @@ EthLanguageSharable >> initialize [
 
 { #category : #querying }
 EthLanguageSharable >> languageNamed: aLanguageName [
-	" Answer an Language named aLanguageName "
+	"Answer the <EthLanguage> named aLanguageName, or raise a not found exception"
 	
 	^ languagesPool 
 		at: aLanguageName asSymbol

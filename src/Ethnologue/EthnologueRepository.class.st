@@ -28,6 +28,11 @@ repository languagesIn: 'Argentina'.
 Class {
 	#name : #EthnologueRepository,
 	#superclass : #Object,
+	#instVars : [
+		'countries',
+		'areas',
+		'languages'
+	],
 	#category : #'Ethnologue-Core'
 }
 
@@ -35,26 +40,23 @@ Class {
 EthnologueRepository >> areas [
 	"Answer a <Collection> of <EthArea>"
 
-	^ EthAreaSharable default areas
+	^ areas
+		ifNil: [ areas := self defaultAreas ]
 ]
 
 { #category : #'querying languages' }
 EthnologueRepository >> commonLanguagesFor: aCountryName [
 	" Answer a <Collection> of <EthLanguage> representing common languages used in aCountryName "
 	
-	| country |
-	
-	country := [ self countryNamed: aCountryName ]
-	on: NotFound
-	do: [: ex | self error: ex messageText ]. 
-	^ country commonLanguages
+	^ (self countryNamed: aCountryName) commonLanguages
 ]
 
 { #category : #'enumerating territories' }
 EthnologueRepository >> countries [
 	"Answer a <Collection> of <EthCountry>"
 
-	^ EthCountrySharable default countries
+	^ countries
+		ifNil: [ countries := self defaultCountries ]
 ]
 
 { #category : #'querying languages' }
@@ -69,6 +71,27 @@ EthnologueRepository >> countryNamed: aString [
 	" Answer an <EthCountry> named aString or raises an exception if not found "
 
 	^ EthCountrySharable default countryNamed: aString
+]
+
+{ #category : #defaults }
+EthnologueRepository >> defaultAreas [
+	"Answer the default <Collection> of <EthArea>"
+
+	^ EthAreaSharable default areas
+]
+
+{ #category : #defaults }
+EthnologueRepository >> defaultCountries [
+	"Answer the default <Collection> of <EthCountry>"
+
+	^ EthCountrySharable default countries
+]
+
+{ #category : #defaults }
+EthnologueRepository >> defaultLanguages [
+	"Answer the default <Collection> of <EthLanguage>"
+
+	^  EthLanguageSharable default languages
 ]
 
 { #category : #'enumerating languages' }
@@ -99,7 +122,8 @@ EthnologueRepository >> languageNamed: aLanguageName [
 EthnologueRepository >> languages [
 	"Answer a <Collection> of <EthLanguage>"
 
-	^ EthLanguageSharable default languages
+	^ languages
+		ifNil: [ languages := self defaultLanguages ]
 ]
 
 { #category : #'querying languages' }

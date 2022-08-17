@@ -1,8 +1,9 @@
 Class {
 	#name : #EthnologueRepositoryTest,
-	#superclass : #TestCase,
+	#superclass : #EthAbstractTest,
 	#instVars : [
-		'ethnologueRepository'
+		'ethnologueRepository',
+		'ethnologueReader'
 	],
 	#category : #'Ethnologue-Tests'
 }
@@ -21,10 +22,28 @@ EthnologueRepositoryTest >> ethnologueRepository: anObject [
 	ethnologueRepository := anObject
 ]
 
+{ #category : #tests }
+EthnologueRepositoryTest >> nigeria [
+
+	^ EthCountry new 
+		identifier: 'NG';
+		area: EthAreaSharable default africa;
+		name: 'Nigeria'; 
+		url: 'http://www.ethnologue.com/show_country.asp?code=NG';
+		yourself
+]
+
 { #category : #running }
 EthnologueRepositoryTest >> setUp [
-	super setUp.
 
+	super setUp.
+	ethnologueRepository := EthnologueRepository new.
+	ethnologueReader := EthnologueReader basicNew
+		countriesCodesData: self mockCountryCodes readStream;
+		languageIndexesData: self mockLanguageIndex readStream;
+		languageCodesData: self mockLanguageCodes readStream;
+		initialize;
+		yourself.
 ]
 
 { #category : #tests }
@@ -37,13 +56,11 @@ EthnologueRepositoryTest >> testAreas [
 { #category : #tests }
 EthnologueRepositoryTest >> testCommonLanguagesFor [
 
-	self assert: ((ethnologueRepository commonLanguagesFor: String empty) isKindOf: Collection).
+	self should: [ ethnologueRepository commonLanguagesFor: String empty ] raise: NotFound.
+	self should: [ ethnologueRepository commonLanguagesFor: '7308eca6-bca2-0d00-a0de-1afa08357045' ] raise: NotFound.
+	self should: [ ethnologueRepository commonLanguagesFor: nil ] raise: MessageNotUnderstood.
 	
-	self assert: ((ethnologueRepository commonLanguagesFor: '7308eca6-bca2-0d00-a0de-1afa08357045') isKindOf: Collection).
-	
-	self assert: ((ethnologueRepository commonLanguagesFor: nil) isKindOf: Collection).
-	
-	self assert: ((ethnologueRepository commonLanguagesFor: 'e709eca6-bca2-0d00-b00a-01550d0e8b3a') equals: Collection).
+	self assert: ((ethnologueRepository commonLanguagesFor: 'Nigeria') isKindOf: Collection).
 	
 ]
 
@@ -57,26 +74,25 @@ EthnologueRepositoryTest >> testCountries [
 { #category : #tests }
 EthnologueRepositoryTest >> testCountriesForLanguage [
 
-	self assert: ((ethnologueRepository countriesForLanguage: String empty) isKindOf: Collection).
+	self should: [ ethnologueRepository countriesForLanguage: String empty ] raise: NotFound.
+	self should: [ ethnologueRepository countriesForLanguage: '78efeba6-bca2-0d00-bfcd-eb6108a3fa98' ] raise: NotFound.
+	self should: [ ethnologueRepository countriesForLanguage: nil ] raise: MessageNotUnderstood.
 	
-	self assert: ((ethnologueRepository countriesForLanguage: '78efeba6-bca2-0d00-bfcd-eb6108a3fa98') isKindOf: Collection).
-	
-	self assert: ((ethnologueRepository countriesForLanguage: nil) isKindOf: Collection).
-	
-	self assert: ((ethnologueRepository countriesForLanguage: 'e5f0eba6-bca2-0d00-ac43-63670f688924') equals: Collection).
-	
+	self 
+		assertCollection: (ethnologueRepository countriesForLanguage: 'Arum') 
+		hasSameElements: { (EthCountry new name: 'Nigeria') }.
 ]
 
 { #category : #tests }
 EthnologueRepositoryTest >> testCountryNamed [
 
-	self assert: ((ethnologueRepository countryNamed: String empty) isKindOf: EthCountry).
+	self should: [ ethnologueRepository countryNamed: String empty ] raise: NotFound.
+	self should: [ ethnologueRepository countryNamed: 'a5d3eaa6-bca2-0d00-b59a-4c4c0e2e5414' ] raise: NotFound.
+	self should: [ ethnologueRepository countryNamed: nil ] raise: MessageNotUnderstood.
 	
-	self assert: ((ethnologueRepository countryNamed: 'a5d3eaa6-bca2-0d00-b59a-4c4c0e2e5414') isKindOf: EthCountry).
-	
-	self assert: ((ethnologueRepository countryNamed: nil) isKindOf: EthCountry).
-	
-	self assert: ((ethnologueRepository countryNamed: 'e3e7eaa6-bca2-0d00-943b-5c180c4e3e88') equals: EthCountry).
+	self 
+		assert: (ethnologueRepository countryNamed: 'Nigeria') 
+		equals: self nigeria.
 	
 ]
 
@@ -97,11 +113,9 @@ EthnologueRepositoryTest >> testIso3Languages [
 { #category : #tests }
 EthnologueRepositoryTest >> testLanguageNamed [
 
-	self assert: ((ethnologueRepository languageNamed: String empty) isKindOf: EthLanguage).
-	
-	self assert: ((ethnologueRepository languageNamed: '585eeba6-bca2-0d00-b4fb-fa460c6000ab') isKindOf: EthLanguage).
-	
-	self assert: ((ethnologueRepository languageNamed: nil) isKindOf: EthLanguage).
+	self should: [ ethnologueRepository languageNamed: String empty ] raise: NotFound.
+	self should: [ ethnologueRepository languageNamed: '585eeba6-bca2-0d00-b4fb-fa460c6000ab' ] raise: NotFound.
+	self should: [ ethnologueRepository languageNamed: nil ] raise: MessageNotUnderstood.
 	
 	self assert: ((ethnologueRepository languageNamed: 'e05feba6-bca2-0d00-ae3a-23ed0b996375') equals: EthLanguage).
 	
@@ -117,12 +131,9 @@ EthnologueRepositoryTest >> testLanguages [
 { #category : #tests }
 EthnologueRepositoryTest >> testLanguagesIn [
 
-	self assert: ((ethnologueRepository languagesIn: String empty) isKindOf: Collection).
+	self should: [ ethnologueRepository languagesIn: String empty ] raise: NotFound.
+	self should: [ ethnologueRepository languagesIn: '9f1deca6-bca2-0d00-8ec3-8cbf0f0f6fab' ] raise: NotFound.
+	self should: [ ethnologueRepository languagesIn: nil ] raise: MessageNotUnderstood.
 	
-	self assert: ((ethnologueRepository languagesIn: '9f1deca6-bca2-0d00-8ec3-8cbf0f0f6fab') isKindOf: Collection).
-	
-	self assert: ((ethnologueRepository languagesIn: nil) isKindOf: Collection).
-	
-	self assert: ((ethnologueRepository languagesIn: '0e1feca6-bca2-0d00-b4c3-0a140499eee7') equals: Collection).
 	
 ]

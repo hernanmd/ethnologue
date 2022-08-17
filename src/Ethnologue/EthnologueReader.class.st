@@ -5,17 +5,25 @@ The Ethnologue catalogue can be seen as a useful subset of ISO 639 which does NO
 - Historical, and 
 - Constructed languages
 
-This class assume the code tables files are under 'Data' folder on current directory. Download the code tables from [https://www.ethnologue.com/codes/Language_Code_Data_20220221.zip](https://www.ethnologue.com/codes/Language_Code_Data_20220221.zip)
+This reader defaults to read from code tables files under a 'data' folder on current directory. Otherwise, you can build a subset of all Ethnologue languages by setting a read stream of TSV to these methods:
+
+- `#countriesCodesData:`
+- `#languageCodesData:`
+- `#languageIndexesData:`
+
+The reader will configure the flyweights `EthCountrySharable` and `EthLanguageSharable`.
+
+The code tables were downloaded from [https://www.ethnologue.com/codes/Language_Code_Data_20220221.zip](https://www.ethnologue.com/codes/Language_Code_Data_20220221.zip)
 
 ```language=Pharo
 "" To generate the ELanguage Objects ""
-LIEthnologueReader new.
+EthnologueReader new.
 
 "" To delete all ELanguage Objects ""
-LIEthnologueReader reset.
+EthnologueReader reset.
 
 "" To access all ELanguage Objects ""
-LILanguageSharable languages
+LanguageSharable languages
 ```
 
 "
@@ -23,7 +31,10 @@ Class {
 	#name : #EthnologueReader,
 	#superclass : #Object,
 	#instVars : [
-		'repository'
+		'repository',
+		'languageCodesData',
+		'languageIndexesData',
+		'countriesCodesData'
 	],
 	#category : #'Ethnologue-Core'
 }
@@ -106,7 +117,14 @@ EthnologueReader >> addLanguages [
 EthnologueReader >> countriesCodesData [
 	" Answer a <Stream> with the country codes "
 
-	^ (self dataSubdirectory / 'CountryCodes.tab') readStream
+	^ countriesCodesData
+		ifNil: [ countriesCodesData := self defaultCountriesCodesData ]
+]
+
+{ #category : #accessing }
+EthnologueReader >> countriesCodesData: anObject [
+
+	countriesCodesData := anObject
 ]
 
 { #category : #private }
@@ -151,6 +169,27 @@ EthnologueReader >> dataSubdirectory [
 	^ 'data' asFileReference
 ]
 
+{ #category : #defaults }
+EthnologueReader >> defaultCountriesCodesData [
+	" Answer a <Stream> with the country codes "
+
+	^ (self dataSubdirectory / 'CountryCodes.tab') readStream
+]
+
+{ #category : #sources }
+EthnologueReader >> defaultLanguageCodesData [
+	" Answer a <Stream> with the language codes  "
+	
+	^ (self dataSubdirectory / 'LanguageCodes.tab') readStream
+]
+
+{ #category : #defaults }
+EthnologueReader >> defaultLanguageIndexesData [
+	" Answer a <Stream> with the language indices"
+	
+	^ (self dataSubdirectory / 'LanguageIndex.tab') readStream
+]
+
 { #category : #initialization }
 EthnologueReader >> initialize [
 	" Private - Create the languages "
@@ -165,16 +204,30 @@ EthnologueReader >> initialize [
 
 { #category : #sources }
 EthnologueReader >> languageCodesData [
-	" Answer a <Stream> with the language codes  "
+	"Answer a <Stream> with the language codes"
 	
-	^ (self dataSubdirectory / 'LanguageCodes.tab') readStream
+	^ languageCodesData 
+		ifNil: [ languageCodesData := self defaultLanguageCodesData ]
+]
+
+{ #category : #accessing }
+EthnologueReader >> languageCodesData: anObject [
+
+	^ languageCodesData := anObject
 ]
 
 { #category : #sources }
 EthnologueReader >> languageIndexesData [
 	" Answer a <Stream> with the language indices"
 	
-	^ (self dataSubdirectory / 'LanguageIndex.tab') readStream
+	^ languageIndexesData
+		ifNil: [ languageIndexesData := self defaultLanguageIndexesData ]
+]
+
+{ #category : #accessing }
+EthnologueReader >> languageIndexesData: anObject [
+
+	languageIndexesData := anObject
 ]
 
 { #category : #accessing }

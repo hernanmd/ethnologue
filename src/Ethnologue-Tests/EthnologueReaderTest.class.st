@@ -26,15 +26,15 @@ EthnologueReaderTest >> setUp [
 
 	super setUp.
 	EthnologueReader release.
-	ethnologueReader := EthnologueReader new.
+	ethnologueReader := EthnologueReader basicNew.
 ]
 
 { #category : #tests }
 EthnologueReaderTest >> testAddCountries [
 
-	self assert: EthCountrySharable default countries isEmpty.
+	self assertEmpty: EthCountrySharable default countries.
 	ethnologueReader addCountries.
-	self deny: EthCountrySharable default countries isEmpty.
+	self denyEmpty: EthCountrySharable default countries.
 	
 ]
 
@@ -55,14 +55,12 @@ EthnologueReaderTest >> testCountriesCodesData [
 { #category : #tests }
 EthnologueReaderTest >> testCreateCountryFrom [
 
-	self assert: ((ethnologueReader createCountryFrom: String empty) isKindOf: EthCountry).
+	self should: [ ethnologueReader createCountryFrom: String empty ] raise: SubscriptOutOfBounds.
+	self should: [ ethnologueReader createCountryFrom: '2449879d-bca2-0d00-b507-94ba07da7ab3' ] raise: MessageNotUnderstood.
+	self should: [ ethnologueReader createCountryFrom: nil ] raise: MessageNotUnderstood.
 	
-	self assert: ((ethnologueReader createCountryFrom: '2449879d-bca2-0d00-b507-94ba07da7ab3') isKindOf: EthCountry).
-	
-	self assert: ((ethnologueReader createCountryFrom: nil) isKindOf: EthCountry).
-	
-	self assert: ((ethnologueReader createCountryFrom: 'f04d879d-bca2-0d00-955b-859f06b532a0') equals: EthCountry).
-	
+	self should: [ ethnologueReader createCountryFrom: #('' '' '' '') ] raise: MessageNotUnderstood.
+	self assert: ((ethnologueReader createCountryFrom: #('ID1' 'MockCountry' 'Europe' '')) isKindOf: EthCountry).
 ]
 
 { #category : #tests }
