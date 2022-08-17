@@ -1,3 +1,7 @@
+"
+Abstract class providing naming protocol to subclasses.
+
+"
 Class {
 	#name : #EthnologueNamedObject,
 	#superclass : #Object,

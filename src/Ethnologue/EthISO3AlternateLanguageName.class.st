@@ -1,3 +1,6 @@
+"
+Represents an alternate name code for a language
+"
 Class {
 	#name : #EthISO3AlternateLanguageName,
 	#superclass : #EthISOLanguageName,

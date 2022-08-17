@@ -3,12 +3,16 @@ Flyweight repository of countries.
 
 To access a country:
 
-LICountrySharable default countryNamed: 'AR'.
-LICountrySharable default countryNamed: 'Argentina'.
+```language=Pharo
+EthCountrySharable default countryNamed: 'AR'.
+EthCountrySharable default countryNamed: 'Argentina'.
+```
 
 To access all countries
 
-LICountrySharable default countries
+```language=Pharo
+EthCountrySharable default countries
+```
 "
 Class {
 	#name : #EthCountrySharable,
@@ -31,7 +35,7 @@ EthCountrySharable class >> default [
 				ESingleton ]
 ]
 
-{ #category : #'initialize-release' }
+{ #category : #'class initialization' }
 EthCountrySharable class >> initialize [
 	" Set the class' initial state "
 	

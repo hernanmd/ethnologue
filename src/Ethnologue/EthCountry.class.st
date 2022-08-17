@@ -1,16 +1,19 @@
 "
-A Country is a country as defined by ISO3166-1 and taken from the Ethnologue project CountriesCodes code table.
+Represents a country as defined by ISO3166-1 and taken from the Ethnologue project CountriesCodes code table.
 
-Instance Variables
-	area:				<Area>		An Area (a Continent)
-	identifier:			<String>		The identifier code of the country.
-	name:				<String>		English name of the country
-	languages			<Collection>	Languages spoken in the country.
-	cities				<Collection>	Cities of the country
-	languageTypes		<Collection>	Language types found in the country.
-	officialLanguages	<Collection>	Languages with official status in the country.
-	spokenLanguages	<Collection>	Languages spoken (no official status) in the country.
-	url:					<Url>		Location of a document on the Internet with additional information about the country
+# Instance Variables
+
+|**Instance variable**|**Class**|**Purpose**|
+|area|	<EthArea>	|An Area (a Continent)|
+|identifier|	<String>|The identifier code of the country|
+|name|<String>|	English name of the country|
+|languages|<Collection>|Languages spoken in the country|
+|cities|<Collection>|Cities of the country|
+|languageTypes|	<Collection>|Language types found in the country|
+|officialLanguages|<Collection>|Languages with official status in the country|
+|spokenLanguages|<Collection>|Languages spoken (no official status) in the country|
+|url|<String>|Location of a document on the Internet with additional information about the country|
+
 
 "
 Class {
@@ -139,6 +142,8 @@ EthCountry >> printOn: aStream [
 
 { #category : #accessing }
 EthCountry >> url [
+	"Answer a <String> representing an Ethnologue URL for the receiver, or nil if not set"
+
 	^ url
 ]
 

@@ -21,21 +21,6 @@ EthCountryTest >> ethCountry: anObject [
 	ethCountry := anObject
 ]
 
-{ #category : #tests }
-EthCountryTest >> newCommonLanguageType [
-
-	^ ELanguageType newType: 'L'
-
-
-
-]
-
-{ #category : #tests }
-EthCountryTest >> newDialectLanguageType [
-
-	^ ELanguageType newType: 'D'
-]
-
 { #category : #running }
 EthCountryTest >> setUp [
 
@@ -171,6 +156,14 @@ EthCountryTest >> testName [
 
 	ethCountry name: String empty.
 	self assert: ethCountry name isEmpty.
+]
+
+{ #category : #test }
+EthCountryTest >> testUrl [
+
+	self assert: ethCountry url equals: nil.
+	ethCountry url: self mockUrlString.
+	self assert: ethCountry url equals: self mockUrlString.
 ]
 
 { #category : #tests }

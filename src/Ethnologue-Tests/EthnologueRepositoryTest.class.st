@@ -117,8 +117,8 @@ EthnologueRepositoryTest >> testLanguageNamed [
 	self should: [ ethnologueRepository languageNamed: '585eeba6-bca2-0d00-b4fb-fa460c6000ab' ] raise: NotFound.
 	self should: [ ethnologueRepository languageNamed: nil ] raise: MessageNotUnderstood.
 	
-	self assert: ((ethnologueRepository languageNamed: 'e05feba6-bca2-0d00-ae3a-23ed0b996375') equals: EthLanguage).
-	
+	self assert: ((ethnologueRepository languageNamed: 'Arum') isKindOf: EthLanguage).
+
 ]
 
 { #category : #tests }

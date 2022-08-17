@@ -126,6 +126,27 @@ EthAbstractTest >> mockLanguageName [
 	^ 'MockLanguage'
 ]
 
+{ #category : #test }
+EthAbstractTest >> mockUrlString [
+
+	^ 'http://www.ethnologue.com/show_country.asp?code=AR'
+]
+
+{ #category : #tests }
+EthAbstractTest >> newCommonLanguageType [
+
+	^ ELanguageType newType: 'L'
+
+
+
+]
+
+{ #category : #tests }
+EthAbstractTest >> newDialectLanguageType [
+
+	^ ELanguageType newType: 'D'
+]
+
 { #category : #mocks }
 EthAbstractTest >> newMockCountry [
 

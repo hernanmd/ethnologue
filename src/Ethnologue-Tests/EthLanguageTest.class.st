@@ -60,7 +60,8 @@ EthLanguageTest >> testCountries [
 	
 	mockCountry := self newMockCountry.
 	self assert: (ethLanguage countries isKindOf: Collection).
-	ethLanguage addCountry: mockCountry.
+	self assertEmpty: ethLanguage countries.
+	ethLanguage types: { self newCommonLanguageType country: mockCountry }.
 	self 
 		assertCollection: ethLanguage countries
 		hasSameElements: { mockCountry }
@@ -69,7 +70,9 @@ EthLanguageTest >> testCountries [
 { #category : #tests }
 EthLanguageTest >> testCountry [
 
-	self assert: (ethLanguage country isKindOf: EthCountry).
+	self assert: ethLanguage country equals: nil.
+	ethLanguage country: self newMockCountry.
+	self assert: ethLanguage country equals: self newMockCountry.
 
 ]
 

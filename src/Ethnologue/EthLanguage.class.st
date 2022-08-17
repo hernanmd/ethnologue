@@ -36,7 +36,6 @@ Class {
 		'status',
 		'types',
 		'country',
-		'scripts',
 		'identifiers'
 	],
 	#category : #'Ethnologue-Core'
@@ -73,9 +72,9 @@ EthLanguage >> countries [
 
 { #category : #accessing }
 EthLanguage >> country [
-	"Answer the <EthCountry> where the receiver is used"
+	"Answer the <EthCountry> where the receiver is used, or nil if not set"
 	
-	^ country ifNil: [ country := Set new ]
+	^ country
 ]
 
 { #category : #accessing }

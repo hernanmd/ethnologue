@@ -1,3 +1,6 @@
+"
+Represents an language identifier in ISO 3 format.
+"
 Class {
 	#name : #EthISO3LanguageName,
 	#superclass : #EthISOLanguageName,

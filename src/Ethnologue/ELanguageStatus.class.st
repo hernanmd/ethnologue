@@ -1,9 +1,6 @@
 "
-From : http://www.ethnologue.com./ethno_docs/introduction.asp#status
-
-The phrase ""Second language only"" is used to indicate languages which are used as special second languages with no mother-tongue speakers such as languages of initiation, languages of herb doctors, cants, jargons, and American Plains Indian Sign Language. Such languages are listed in the body of the Ethnologue but not included among the statistical summaries of living languages. The inventory of these languages is also incomplete.
-
-The phrase ""Nearly extinct"" is used to indicate those languages of fewer than 50 speakers and other languages for which the number of speakers is a very small fraction of the ethnic group.
+Abstract class which provides a factory method to create different language status types.
+See class side for details.
 "
 Class {
 	#name : #ELanguageStatus,
@@ -14,9 +11,16 @@ Class {
 	#category : #'Ethnologue-Language'
 }
 
+{ #category : #accessing }
+ELanguageStatus class >> identifier [
+	"Answer a <Character> with the receiver's ethnologue code table identifier"
+
+	self subclassResponsibility
+]
+
 { #category : #'class initialization' }
 ELanguageStatus class >> initialize [
-	" Private - Initialize the receiver's status "
+	"Private - Initialize the receiver's status"
 
 	LanguageStatus := IdentityDictionary new.
 	self subclassesDo: [: cls |
@@ -33,7 +37,7 @@ ELanguageStatus class >> languageStatus [
 
 { #category : #'instance creation' }
 ELanguageStatus class >> newStatus: aString [
-	" Answer a new corresponding ELanguageStatus subclass depending of aString parameter "
+	"Answer a new <ELanguageStatus> subclass matching aString parameter type"
 	
 	^ self languageStatus
 		at: aString asECharacter

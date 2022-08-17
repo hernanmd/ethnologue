@@ -1,3 +1,6 @@
+"
+A living language is defined as one that is the first language of at least one person.
+"
 Class {
 	#name : #ELivingLanguage,
 	#superclass : #ELanguageStatus,

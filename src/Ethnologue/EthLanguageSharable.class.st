@@ -42,7 +42,7 @@ EthLanguageSharable class >> new [
 	^ self basicNew initialize
 ]
 
-{ #category : #'initialize-release' }
+{ #category : #dependencies }
 EthLanguageSharable class >> release [
 	" Prepare the class to be deleted "
 	

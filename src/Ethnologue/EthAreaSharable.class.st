@@ -23,7 +23,7 @@ EthAreaSharable class >> default [
 
 ]
 
-{ #category : #'initialize-release' }
+{ #category : #'class initialization' }
 EthAreaSharable class >> initialize [
 	" Set the class' initial state "
 	
@@ -38,7 +38,7 @@ EthAreaSharable class >> new [
 	^ self basicNew initialize
 ]
 
-{ #category : #'initialize-release' }
+{ #category : #dependencies }
 EthAreaSharable class >> release [
 	" Prepare the class to be deleted "
 	

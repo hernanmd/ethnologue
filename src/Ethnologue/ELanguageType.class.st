@@ -1,6 +1,8 @@
 "
+# Instance variables
+
 code		<ELanguage>		The ""owner"" of the receiver.
-country		<ECountry>		The country where is spoken the receiver
+country	<ECountry>		The country where is spoken the receiver
 name		<String>			Name of the receiver
 "
 Class {
@@ -15,6 +17,13 @@ Class {
 	],
 	#category : #'Ethnologue-Language'
 }
+
+{ #category : #accessing }
+ELanguageType class >> identifier [
+	"Answer the receiver's ethnologue code table identifier"
+
+	self subclassResponsibility
+]
 
 { #category : #'class initialization' }
 ELanguageType class >> initialize [
@@ -51,14 +60,15 @@ ELanguageType class >> reset [
 
 { #category : #testing }
 ELanguageType >> <= anELanguageType [
-	" Answer <true> if receiver's name sorts before or equal 
-	to anELanguageType name "
+	" Answer <true> if receiver's name sorts before or equal to anELanguageType name "
 
 	^ self name <= anELanguageType name
 ]
 
 { #category : #accessing }
 ELanguageType >> country [
+	"Answer the receiver's <EthCountry>, or nil if not set"
+
 	^ country
 ]
 
