@@ -41,12 +41,13 @@ Class {
 
 { #category : #dependencies }
 EthnologueReader class >> release [
-	" Release the language information resources "
+	"Release the language information resources"
 
 	ELanguageType reset.
 	ELanguageStatus reset.
 	EthCountrySharable release.
 	EthLanguageSharable release.
+	EthAreaSharable release.
 ]
 
 { #category : #accessing }

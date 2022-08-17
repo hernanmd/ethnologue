@@ -32,6 +32,7 @@ EthLanguageSharable class >> initialize [
 	" Set the class' initial state "
 	
 	ESingleton := self new.
+	EthnologueReader new.
 
 ]
 

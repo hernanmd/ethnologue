@@ -46,6 +46,13 @@ EthnologueRepositoryTest >> setUp [
 		yourself.
 ]
 
+{ #category : #running }
+EthnologueRepositoryTest >> tearDown [ 
+
+	EthnologueReader release.
+	super tearDown.
+]
+
 { #category : #tests }
 EthnologueRepositoryTest >> testAreas [
 

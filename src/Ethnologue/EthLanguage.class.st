@@ -1,30 +1,15 @@
 "
-Instance Variables
-	countries:		<Collection>
-	identifier:		<String>
-	name:			<String>
-	names:			<Collection>
-	status:			<ELanguageStatus>
-	type:			<ELanguageType>
-	scripts:			<Collection>
+Represents a language as defined by Ethnologue.
 
-countries
-	- xxxxx
+See `EthnologueRepository` to see usage examples.
 
-identifier
-	- xxxxx
-
-name
-	- xxxxx
-
-names
-	- xxxxx
-
-status
-	- xxxxx
-
-type
-	- xxxxx
+- countries:		<Collection>
+- identifier:		<String>
+- name:			<String>
+- names:			<Collection>
+- status:			<ELanguageStatus>
+- type:			<ELanguageType>
+- scripts:			<Collection>
 
 "
 Class {
