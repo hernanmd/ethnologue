@@ -167,7 +167,7 @@ EthnologueReader >> createLanguageStatus: aString [
 { #category : #sources }
 EthnologueReader >> dataSubdirectory [
 
-	^ 'data' asFileReference
+	^ 'Language_Code_Data_20220221' asFileReference
 ]
 
 { #category : #defaults }
