@@ -11,11 +11,14 @@ BaselineOfEthnologue >> baseline: spec [
 		for: #(common)
 		do: [ 
 			spec 
+				baseline: 'NeoCSV'
+				with: [ spec loads: #('core'); repository: 'github://svenvc/NeoCSV/repository' ].
+			spec 
 				preLoadDoIt: #preLoad;
 				package: 'Ethnologue';
 				package: 'Ethnologue-Tests'	with: [ spec requires: #(Ethnologue) ].
 			spec 
-				group: 'Core' 						with: #('Ethnologue');
+				group: 'Core' 						with: #('Ethnologue' 'NeoCSV');
 				group: 'Tests' 						with: #('Ethnologue' 'Ethnologue-Tests');
 				group: 'default' 					with: #('Core' 'Tests') ]
 ]
