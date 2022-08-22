@@ -16,7 +16,7 @@
 
 # Description
 
-The Ethnologue project includes the most comprehensive database of information about languages of the world. Its use is intended mainly for linguistic purposes, like those related with bibliographic databases and natural spoken language inventories. It supports dialects, creoles, mixed languages, etc. except for ancient, historical, and constructed languages.
+The Ethnologue project is the most comprehensive database of information about languages of the world. Its use is intended mainly for linguistic purposes, like those related with bibliographic databases, short-scale language mapping and natural spoken language inventories. It supports dialects, creoles, mixed languages, etc. except for ancient, historical, and constructed languages. The Summer Institute of Linguistics (SIL) is the organization behind the research on both written and unwritten languages. Check information about data licensing on [the Ethnologue web site](https://www.ethnologue.com/).
 
 This project is an object model for Pharo to access Ethnologue data. 
 
